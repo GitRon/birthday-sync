@@ -1,0 +1,54 @@
+*~
+*.pyc
+.idea
+.local
+.webassets-cache
+.sonar
+.DS_Store
+/staticfiles
+/static/bundles/*
+/static/scss/.sass-cache/*
+/media/
+/dev.db
+/logs/*
+!/logs/.gitkeep
+*.sqlite3
+*.log
+.coverage
+.cache
+__pycache__
+
+# Local env
+.env
+!/aws/**/.env
+venv
+
+# NPM & Yarn
+/node_modules/
+/static/webpack_bundles/*
+webpack-stats.json
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Generated files
+**/.sass-cache/*
+/static/scss/**/*.css
+/static/scss/**/*.css.map
+
+# docker
+celerybeat.pid
+celerybeat-schedule
+.bash_history
+
+# Local testing
+apps/*/management/commands/test_task.py
+
+# Internationalisation
+**/locale/**/*.mo
+
+# Coverage
+coverage.xml
+.coverage.*

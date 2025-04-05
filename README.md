@@ -1,2 +1,3 @@
-# birthday-sync
-Small application to sync Google contact birthdays to Google calendar
+# Google Birthday Sync
+
+Small application to sync Google contact birthdays to Google calendar.
