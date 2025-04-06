@@ -11,5 +11,5 @@ class GoogleContact(models.Model):
         unique=True, max_length=100, blank=True, null=True
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name

@@ -1,4 +1,6 @@
 import datetime
+import io
+import sys
 
 from django.core.management import BaseCommand
 from django.utils import timezone
@@ -12,6 +14,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Fetch all birthdays and store them in database
         sync_birthdays()
+
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
         # Create events for each birthday
         event_service = GoogleEventService()
@@ -28,12 +32,14 @@ class Command(BaseCommand):
             )
 
             if contact.google_event_id:
+                print("> Updating contact event...")
                 event_service.update_event(
                     event_id=contact.google_event_id,
                     summary=summary,
                     target_date=target_date,
                 )
             else:
+                print("> Creating contact event...")
                 event_id = event_service.create_event(
                     summary=summary, target_date=target_date
                 )
