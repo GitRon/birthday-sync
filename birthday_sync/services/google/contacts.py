@@ -43,20 +43,28 @@ def sync_birthdays():
             if not (birthday_day and birthday_month):
                 raise Exception("Missing birthday fields")
 
-            # print(
-            #     f"{name} ({contact_id}): {birthday.get('year', 'XXXX')}-{birthday.get('month', 'XX')}-"
-            #     f"{birthday.get('day', 'XX')}")
-
+            is_updated = False
             db_contact = GoogleContact.objects.filter(google_id=contact_id).first()
 
             if not db_contact:
                 db_contact = GoogleContact(google_id=contact_id)
+                is_updated = True
 
-            db_contact.name = name
-            db_contact.birthday_day = birthday_day
-            db_contact.birthday_month = birthday_month
-            db_contact.birthday_year = birthday_year
-            db_contact.save()
+            if (
+                db_contact.name != name
+                or db_contact.birthday_day != birthday_day
+                or db_contact.birthday_month != birthday_month
+                or db_contact.birthday_year != birthday_year
+            ):
+                is_updated = True
+
+            if is_updated:
+                db_contact.name = name
+                db_contact.birthday_day = birthday_day
+                db_contact.birthday_month = birthday_month
+                db_contact.birthday_year = birthday_year
+                db_contact.is_updated = True
+                db_contact.save()
 
             synced_contacts.append(contact_id)
 

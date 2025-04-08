@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
         # Create events for each birthday
         event_service = GoogleEventService()
-        for contact in GoogleContact.objects.all():
+        for contact in GoogleContact.objects.filter(is_updated=True):
             print(f"Processing contact {contact}...")
 
             summary = (
@@ -46,3 +46,5 @@ class Command(BaseCommand):
 
                 contact.google_event_id = event_id
                 contact.save()
+
+        GoogleContact.objects.filter(is_updated=True).update(is_updated=False)

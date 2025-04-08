@@ -10,6 +10,7 @@ class GoogleContact(models.Model):
     google_event_id = models.CharField(
         unique=True, max_length=100, blank=True, null=True
     )
+    is_updated = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return self.name

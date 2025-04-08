@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
     DJANGO_BIRTHDAY_CALENDAR_ID=(str, ""),
+    DJANGO_DATABASE_URL=(str, ""),
 )
 
 environ.Env.read_env()
@@ -88,10 +89,7 @@ WSGI_APPLICATION = "birthday_sync.config.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": env.db("DJANGO_DATABASE_URL"),
 }
 
 
